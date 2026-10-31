@@ -94,6 +94,72 @@ integração confirma **a comunicação entre as camadas**.
 
 ---
 
-# Desafio 002 - Criação do endpoint GET /Product
+# Desafio 002 - Criação dos endpoints de Product e Customer
 
 ---
+
+## Testes E2E da API
+
+Nesta etapa foram adicionados os testes de infraestrutura da API para as
+rotas de produtos e clientes. Eles ficam em:
+
+- `src/infrastructure/api/routes/product.route.ts`
+- `src/infrastructure/api/routes/customer.route.ts`
+- `src/infrastructure/api/__tests__/product.e2e.spec.ts`
+- `src/infrastructure/api/__tests__/customer.e2e.spec.ts`
+
+O teste E2E (end-to-end) valida o fluxo completo de uma requisição HTTP,
+passando pela aplicação Express, rota, caso de uso, repositório e banco de
+dados. Dessa forma, ele verifica o comportamento observado pelo consumidor
+da API, e não apenas uma unidade isolada. Os testes usam o Supertest e um
+SQLite em memória. O banco é recriado antes de cada teste e a conexão é
+encerrada ao final da suíte.
+
+### Testes de Product
+
+O arquivo `product.e2e.spec.ts` testa a rota `/product`:
+
+- `POST /product`: cria um produto e valida o status HTTP e os dados
+  retornados;
+- `GET /product`: cria três produtos, lista todos e valida a quantidade, a
+  ordem e os dados de cada produto.
+
+Para executar somente os testes E2E de produtos:
+
+```bash
+npx jest src/infrastructure/api/__tests__/product.e2e.spec.ts
+```
+
+### Testes de Customer
+
+O arquivo `customer.e2e.spec.ts` testa a rota `/customer`:
+
+- criação de um cliente válido;
+- rejeição de um cliente com dados inválidos;
+- listagem de clientes em JSON;
+- listagem de clientes em XML quando o cabeçalho `Accept` é
+  `application/xml`.
+
+Para executar somente os testes E2E de clientes:
+
+```bash
+npx jest src/infrastructure/api/__tests__/customer.e2e.spec.ts
+```
+
+### Executar os testes da API
+
+Para executar os testes E2E de clientes e produtos juntos:
+
+```bash
+npx jest src/infrastructure/api/__tests__
+```
+
+Para executar toda a suíte do projeto, incluindo a verificação de tipos:
+
+```bash
+npm test
+```
+
+O comando `npm test` executa primeiro `tsc --noEmit` e depois todos os testes
+encontrados pelo Jest. Os comandos específicos com `npx jest` executam apenas
+os testes indicados e não fazem a verificação de tipos.
