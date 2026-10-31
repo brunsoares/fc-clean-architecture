@@ -14,6 +14,12 @@ Instale as dependências antes de executar os comandos:
 npm install
 ```
 
+---
+
+# Desafio 001 - Criação de UseCases para Product
+
+---
+
 ## Como rodar os testes
 
 Para executar a verificação de tipos e toda a suíte de testes:
@@ -85,3 +91,9 @@ permitindo verificar também a persistência e o mapeamento dos dados.
 
 Em resumo: o teste unitário confirma **a lógica isolada**; o teste de
 integração confirma **a comunicação entre as camadas**.
+
+---
+
+# Desafio 002 - Criação do endpoint GET /Product
+
+---
