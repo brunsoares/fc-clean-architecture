@@ -201,3 +201,40 @@ npx jest src/domain/product/entity/product.spec.ts
 
 O comando específico do Jest executa apenas essa suíte e não realiza a
 verificação de tipos.
+
+---
+
+# Desafio 004 - Adaptação de Product para Validator com YUP
+
+---
+
+Nesta etapa, a entidade `Product` passou a utilizar a biblioteca Yup para
+validar `id`, `name` e `price`. Os erros continuam sendo encaminhados para a
+`Notification`, mantendo o comportamento dos testes e a integração existente
+com o mecanismo de notificações, inclusive para múltiplas falhas de validação.
+
+Para evitar um acoplamento direto da entidade com a biblioteca Yup, a criação
+do validador foi isolada em `ProductValidatorFactory`, seguindo o padrão
+Factory Method. Dessa forma, `Product` depende da abstração
+`ValidatorInterface`, enquanto a implementação específica
+`ProductYupValidator` concentra o uso do Yup.
+
+## Como executar os testes
+
+Para executar a verificação de tipos e todos os testes do projeto:
+
+```bash
+npm test
+```
+
+Esse comando executa `tsc --noEmit` e, em seguida, toda a suíte de testes do
+Jest.
+
+Para executar somente os testes relacionados a `Product`:
+
+```bash
+npx jest src/domain/product
+```
+
+Esse comando executa exclusivamente os testes da entidade, fábrica, validador
+e serviços de `Product`, sem realizar a verificação de tipos.
