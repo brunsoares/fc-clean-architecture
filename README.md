@@ -163,3 +163,41 @@ npm test
 O comando `npm test` executa primeiro `tsc --noEmit` e depois todos os testes
 encontrados pelo Jest. Os comandos específicos com `npx jest` executam apenas
 os testes indicados e não fazem a verificação de tipos.
+
+---
+
+# Desafio 003 - Adaptação de Product para Notification
+
+---
+
+Nesta etapa, a entidade `Product` foi adaptada para utilizar o mecanismo de
+notificações da aplicação. Em vez de interromper a validação com um `throw`
+para cada erro encontrado, as regras de `id`, `name` e `price` registram os
+erros em uma `Notification`. Quando a criação do produto termina com erros, o
+construtor lança um `NotificationError` contendo todas as notificações
+acumuladas.
+
+Os testes da entidade `Product` também foram atualizados para validar as
+mensagens no formato da notificação. Além dos casos individuais para `id`,
+`name` e `price`, foi adicionado um cenário que cria um produto com os três
+campos inválidos e verifica se todos os erros são reportados juntos.
+
+## Como executar os testes
+
+Para executar a verificação de tipos e toda a suíte de testes do projeto:
+
+```bash
+npm test
+```
+
+Esse comando executa `tsc --noEmit` e, em seguida, todos os testes encontrados
+pelo Jest.
+
+Para executar somente a suíte unitária da entidade `Product`:
+
+```bash
+npx jest src/domain/product/entity/product.spec.ts
+```
+
+O comando específico do Jest executa apenas essa suíte e não realiza a
+verificação de tipos.
